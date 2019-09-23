@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "snm",
+  "version": "${version}",
+
+  "name": "Secrets No More",
+  "description": "Brings back Super Secret Settings, but less secret!",
+  "authors": [
+    "DaveyL2013"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/modid/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "net.secrets.no.more.SecrNoMore"
+    ]
+  },
+  "mixins": [
+  
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.4.0",
+    "fabric": "*"
+  },
+  "suggests": {
+    "flamingo": "*"
+  }
+}
