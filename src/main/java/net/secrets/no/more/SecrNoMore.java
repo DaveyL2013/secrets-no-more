@@ -38,7 +38,6 @@ public class SecrNoMore implements ClientModInitializer {
             final ManagedShaderEffect add = ShaderEffectManager.getInstance().manage(new Identifier(id));
             shaders.add(add);
         }
-        System.out.println(shaders.get(1));
         ShaderEffectRenderCallback.EVENT.register(rs -> {
             if (shadersOn == true) {
                 shaders.get(shaderIndex).render(rs);
