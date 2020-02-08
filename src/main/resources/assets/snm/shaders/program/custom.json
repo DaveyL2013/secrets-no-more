@@ -1,0 +1,17 @@
+{
+    "targets": [
+        "noop"
+    ],
+    "passes": [
+        {
+            "name": "custom",
+            "intarget": "minecraft:main",
+            "outtarget": "noop"
+        },
+        {
+            "name": "custom",
+            "intarget": "noop",
+            "outtarget": "minecraft:main"
+        }
+    ]
+}
