@@ -1,6 +1,7 @@
 package net.secrets.no.more;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import com.google.common.collect.ImmutableList;
@@ -21,6 +22,8 @@ public class SecrNoMore implements ClientModInitializer {
 
     int shaderIndex = 0;
     boolean shadersOn = false;
+    Collection<Identifier> ids;
+    List<ManagedShaderEffect> shaders;
 
     @Override
     public void onInitializeClient() {
@@ -39,14 +42,13 @@ public class SecrNoMore implements ClientModInitializer {
             shaders.add(add);
         }
         ShaderEffectRenderCallback.EVENT.register(rs -> {
-            if (shadersOn == true) {
+            if (shadersOn) {
                 shaders.get(shaderIndex).render(rs);
             }
-            ;
         });
 
         FabricKeyBinding toggleShader = FabricKeyBinding.Builder
-                .create(new Identifier("shader", "toggle"), InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_F4, "Secrets No More")
+                .create(new Identifier("snm", "toggle"), InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_F6, "Secrets No More")
                 .build();
 
         KeyBindingRegistry.INSTANCE.register(toggleShader);
@@ -55,24 +57,42 @@ public class SecrNoMore implements ClientModInitializer {
             if (toggleShader.wasPressed()) {
                 shadersOn = !shadersOn;
             }
-            ;
         });
 
-        FabricKeyBinding cycleShader = FabricKeyBinding.Builder
-                .create(new Identifier("shader", "cycle"), InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_F6, "Secrets No More")
-                .build();
+        FabricKeyBinding cycleShaderUp = FabricKeyBinding.Builder.create(new Identifier("snm", "cycleup"),
+                InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_KP_ADD, "Secrets No More").build();
 
-        KeyBindingRegistry.INSTANCE.register(cycleShader);
+        KeyBindingRegistry.INSTANCE.register(cycleShaderUp);
 
-        ClientTickCallback.EVENT.register(cs -> {
-            if (cycleShader.wasPressed()) {
-                if (shaderIndex + 2 > shaders.size() || shaderIndex < 0) {
+        FabricKeyBinding cycleShaderDown = FabricKeyBinding.Builder.create(new Identifier("snm", "cycledown"),
+                InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_KP_SUBTRACT, "Secrets No More").build();
+
+        KeyBindingRegistry.INSTANCE.register(cycleShaderDown);
+
+        ClientTickCallback.EVENT.register(csu -> {
+            if (cycleShaderUp.wasPressed()) {
+                if (shaderIndex + 2 > shaders.size()) {
                     shaderIndex = 0;
+                } else if (shaderIndex < 0) {
+                    shaderIndex = shaders.size() - 1;
                 } else {
                     shaderIndex += 1;
                 }
                 ;
             }
         });
+
+        ClientTickCallback.EVENT.register(csd -> {
+            if (cycleShaderDown.wasPressed()) {
+                if (shaderIndex > shaders.size()) {
+                    shaderIndex = 0;
+                } else if (shaderIndex - 1 < 0) {
+                    shaderIndex = shaders.size() - 1;
+                } else {
+                    shaderIndex -= 1;
+                }
+            }
+        });
     }
+
 }
