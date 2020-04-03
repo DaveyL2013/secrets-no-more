@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.2.5-SNAPSHOT'
+	id 'fabric-loom' version '0.2.6-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -28,18 +28,16 @@ repositories {
 }
 
 dependencies {
-	//to change the versions see the gradle.properties file
-	minecraft "com.mojang:minecraft:1.15"
-    mappings "net.fabricmc:yarn:1.15+build.1"
-    modCompile "net.fabricmc:fabric-loader:0.7.2+build.174"
+    minecraft "com.mojang:minecraft:20w13a"
+    mappings "net.fabricmc:yarn:20w13a+build.6:v2"
+    modImplementation "net.fabricmc:fabric-loader:0.7.9+build.190"
+            
+    //Fabric api
+    modImplementation "net.fabricmc.fabric-api:fabric-api:0.5.6+build.313-1.16"
 
-	// Fabric API. This is technically optional, but you probably want it anyway.
-	modCompile "net.fabricmc.fabric-api:fabric-api:0.4.23+build.276-1.15"
-	modImplementation "com.github.Ladysnake:Satin:${satin_version}"
-    include "com.github.Ladysnake:Satin:${satin_version}"
-
-	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
-	// You may need to force-disable transitiveness on them.
+	//Satin Library
+	modImplementation 'com.github.DaveyL2013:Satin:1.5.0-SNAPSHOT'
+	include 'com.github.DaveyL2013:Satin:1.5.0-SNAPSHOT'
 }
 
 processResources {
