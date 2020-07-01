@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.2.6-SNAPSHOT'
+	id 'fabric-loom' version '0.2.7-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -28,16 +28,16 @@ repositories {
 }
 
 dependencies {
-    minecraft "com.mojang:minecraft:20w13a"
-    mappings "net.fabricmc:yarn:20w13a+build.6:v2"
-    modImplementation "net.fabricmc:fabric-loader:0.7.9+build.190"
+    minecraft "com.mojang:minecraft:1.16"
+    mappings "net.fabricmc:yarn:1.16+build.4:v2"
+    modImplementation "net.fabricmc:fabric-loader:0.8.8+build.202"
             
     //Fabric api
-    modImplementation "net.fabricmc.fabric-api:fabric-api:0.5.6+build.313-1.16"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:0.14.0+build.371-1.16"
 
 	//Satin Library
-	modImplementation 'com.github.DaveyL2013:Satin:1.5.0-SNAPSHOT'
-	include 'com.github.DaveyL2013:Satin:1.5.0-SNAPSHOT'
+	modImplementation 'com.github.Ladysnake:Satin:1.16-SNAPSHOT'
+	include 'com.github.Ladysnake:Satin:1.16-SNAPSHOT'
 }
 
 processResources {
